@@ -10,6 +10,7 @@ package assets;
 	Assets.tiles.getTile( D.tiles.mySlice ); // uses "D" alias defined in "import.hx" file
 	```
 **/
-class AssetsDictionaries {
-	public static var tiles = dn.heaps.assets.Aseprite.getDict( hxd.Res.atlas.tiles );
+class AssetsDictionaries
+{
+	public static var tiles = dn.heaps.assets.Aseprite.getDict(hxd.Res.atlas.tiles);
 }

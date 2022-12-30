@@ -1,0 +1,2 @@
+*.sh text eol=lf
+packList.txt text eol=lf

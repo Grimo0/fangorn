@@ -7,22 +7,22 @@ package sample;
 	- controllable (using gamepad or keyboard)
 	- some squash animations, because it's cheap and they do the job
 **/
-
-class SamplePlayer extends Entity {
+class SamplePlayer extends en.Entity
+{
 	var ca : ControllerAccess<GameAction>;
 	var walkSpeed = 0.;
 
 	// This is TRUE if the player is not falling
-	var onGround(get,never) : Bool;
-		inline function get_onGround() return !destroyed && v.dy==0 && yr==1 && level.hasCollision(cx,cy+1);
+	var onGround(get, never) : Bool;
+	inline function get_onGround() return !destroyed && v.dy == 0 && yr == 1 && level.hasCollision(cx, cy + 1);
 
-
-	public function new() {
-		super(5,5);
+	public function new()
+	{
+		super(5, 5);
 
 		// Start point using level entity "PlayerStart"
 		var start = level.data.l_Entities.all_PlayerStart[0];
-		if( start!=null )
+		if (start != null)
 			setPosCase(start.cx, start.cy);
 
 		// Misc inits
@@ -37,37 +37,38 @@ class SamplePlayer extends Entity {
 		ca.lockCondition = Game.isGameControllerLocked;
 
 		// Placeholder display
-		var b = new h2d.Bitmap( h2d.Tile.fromColor(Green, iwid, ihei), spr );
-		b.tile.setCenterRatio(0.5,1);
+		var b = new h2d.Bitmap(h2d.Tile.fromColor(Green, iwid, ihei), spr);
+		b.tile.setCenterRatio(0.5, 1);
 	}
 
-
-	override function dispose() {
+	override function dispose()
+	{
 		super.dispose();
 		ca.dispose(); // don't forget to dispose controller accesses
 	}
 
-
 	/** X collisions **/
-	override function onPreStepX() {
+	override function onPreStepX()
+	{
 		super.onPreStepX();
 
 		// Right collision
-		if( xr>0.8 && level.hasCollision(cx+1,cy) )
+		if (xr > 0.8 && level.hasCollision(cx + 1, cy))
 			xr = 0.8;
 
 		// Left collision
-		if( xr<0.2 && level.hasCollision(cx-1,cy) )
+		if (xr < 0.2 && level.hasCollision(cx - 1, cy))
 			xr = 0.2;
 	}
 
-
 	/** Y collisions **/
-	override function onPreStepY() {
+	override function onPreStepY()
+	{
 		super.onPreStepY();
 
 		// Land on ground
-		if( yr>1 && level.hasCollision(cx,cy+1) ) {
+		if (yr > 1 && level.hasCollision(cx, cy + 1))
+		{
 			setSquashY(0.5);
 			v.dy = 0;
 			vBump.dy = 0;
@@ -77,25 +78,26 @@ class SamplePlayer extends Entity {
 		}
 
 		// Ceiling collision
-		if( yr<0.2 && level.hasCollision(cx,cy-1) )
+		if (yr < 0.2 && level.hasCollision(cx, cy - 1))
 			yr = 0.2;
 	}
-
 
 	/**
 		Control inputs are checked at the beginning of the frame.
 		VERY IMPORTANT NOTE: because game physics only occur during the `fixedUpdate` (at a constant 30 FPS), no physics increment should ever happen here! What this means is that you can SET a physics value (eg. see the Jump below), but not make any calculation that happens over multiple frames (eg. increment X speed when walking).
 	**/
-	override function preUpdate() {
+	override function preUpdate()
+	{
 		super.preUpdate();
 
 		walkSpeed = 0;
-		if( onGround )
-			cd.setS("recentlyOnGround",0.1); // allows "just-in-time" jumps
+		if (onGround)
+			cd.setS("recentlyOnGround", 0.1); // allows "just-in-time" jumps
 
 
 		// Jump
-		if( cd.has("recentlyOnGround") && ca.isPressed(Jump) ) {
+		if (cd.has("recentlyOnGround") && ca.isPressed(Jump))
+		{
 			v.dy = -0.85;
 			setSquashX(0.6);
 			cd.unset("recentlyOnGround");
@@ -104,22 +106,23 @@ class SamplePlayer extends Entity {
 		}
 
 		// Walk
-		if( ca.getAnalogDist2(MoveLeft,MoveRight)>0 ) {
+		if (ca.getAnalogDist2(MoveLeft, MoveRight) > 0)
+		{
 			// As mentioned above, we don't touch physics values (eg. `dx`) here. We just store some "requested walk speed", which will be applied to actual physics in fixedUpdate.
-			walkSpeed = ca.getAnalogValue2(MoveLeft,MoveRight); // -1 to 1
+			walkSpeed = ca.getAnalogValue2(MoveLeft, MoveRight); // -1 to 1
 		}
 	}
 
-
-	override function fixedUpdate() {
+	override function fixedUpdate()
+	{
 		super.fixedUpdate();
 
 		// Gravity
-		if( !onGround )
-			v.dy+=0.05;
+		if (!onGround)
+			v.dy += 0.05;
 
 		// Apply requested walk movement
-		if( walkSpeed!=0 )
+		if (walkSpeed != 0)
 			v.dx += walkSpeed * 0.045; // some arbitrary speed
 	}
 }

@@ -4,63 +4,136 @@
 	"skipErrorMessage": true,
 	"commands": [
 		{
-			"text": "🍊 DX",
+			"text": "$(sync)",
+			"color": "white",
+			"commandType":"palette",
+			"command": "haxe.restartLanguageServer",
+			"alignment": "right",
+			"skipTerminateQuickPick": false,
+			"priority": -0,
+			"tooltip": "Haxe: Restart Language Server"
+		},
+		{
+			"text": "🍊DX",
 			"color": "orange",
-			"commandType":"exec",
-			"command": "haxe build.directx.hxml",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|Build DX",
 			"alignment": "right",
 			"skipTerminateQuickPick": false,
 			"priority": -9
 		},
 		{
-			"text": "🍊 OpenGL",
+			"text": "🍊SDL",
 			"color": "orange",
-			"commandType":"exec",
-			"command": "haxe build.opengl.hxml",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|Build Sdl",
 			"alignment": "right",
 			"skipTerminateQuickPick": false,
 			"priority": -10
 		},
 		{
-			"text": "Run HL",
+			"text": "Run",
 			"color": "orange",
 			"command": "hl bin/client.hl",
 			"alignment": "right",
 			"skipTerminateQuickPick": false,
-			"priority": -11
+			"priority": -11,
+			"tooltip": "Run last hl build."
 		},
 		{
-			"text": "☕ JS",
+			"text": "☕JS",
 			"color": "yellow",
-			"commandType":"exec",
-			"command": "haxe build.js.hxml",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|Build JS",
+			"alignment": "right",
+			"skipTerminateQuickPick": false,
+			"priority": -12
+		},
+		{
+			"text": "Run",
+			"color": "yellow",
+			"command": "start run_js.html",
+			"alignment": "right",
+			"skipTerminateQuickPick": false,
+			"priority": -13,
+			"tooltip": "Run last JS build."
+		},
+		{
+			"text": "🧹FormatSrc",
+			"color": "white",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|Src Formatter",
 			"alignment": "right",
 			"skipTerminateQuickPick": false,
 			"priority": -20
 		},
 		{
-			"text": "Run JS",
-			"color": "yellow",
-			"command": "start run_js.html",
+			"text": "🖼️PackImg",
+			"color": "white",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|Pack textures",
 			"alignment": "right",
 			"skipTerminateQuickPick": false,
 			"priority": -21
 		},
 		{
-			"text": "🅰️ Lang",
+			"text": "🌍POT",
 			"color": "white",
-			"command": "haxe tools.langParser.hxml",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|Lang Parser",
 			"alignment": "right",
 			"skipTerminateQuickPick": false,
 			"priority": -40
 		},
 		{
-			"text": "📦 Redist",
+			"text": "📦",
 			"color": "lightgreen",
-			"command": "haxelib run redistHelper build.directx.hxml build.opengl.hxml build.js.hxml -o redist -p GameBase -zip",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|HL redist",
 			"alignment": "right",
 			"skipTerminateQuickPick": false,
-			"priority": -50
+			"priority": -50,
+			"tooltip": "Create a package in the redist folder."
+		},
+		{
+			"text": "📦JS",
+			"color": "lightgreen",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|JS redist",
+			"alignment": "right",
+			"skipTerminateQuickPick": false,
+			"priority": -51,
+			"tooltip": "Create a package in the redist folder."
+		},
+		{
+			"text": "📦dbg",
+			"color": "lightgreen",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|HL redist debug",
+			"alignment": "right",
+			"skipTerminateQuickPick": false,
+			"priority": -52,
+			"tooltip": "Create a package in the redist folder."
+		},
+		{
+			"text": "$(fold-up)Itch",
+			"color": "white",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|Butler js",
+			"alignment": "right",
+			"skipTerminateQuickPick": false,
+			"priority": -61,
+			"tooltip": "Upload to itch.io"
+		},
+		{
+			"text": "$(fold-up)Steam",
+			"color": "white",
+			"commandType":"palette",
+			"command": "workbench.action.tasks.runTask|Steam upload",
+			"alignment": "right",
+			"skipTerminateQuickPick": false,
+			"priority": -62,
+			"tooltip": "Upload to steam"
 		}
 	]
 }

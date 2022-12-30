@@ -1,7 +1,9 @@
 import dn.data.GetText;
 
-class LangParser {
-	public static function main() {
+class LangParser
+{
+	public static function main()
+	{
 		var allEntries : Array<PoEntry> = [];
 
 		// Extract from source code

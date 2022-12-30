@@ -1,0 +1,100 @@
+{
+	"emptyLines": {
+		"abstractEmptyLines": {
+			"existingBetweenFields": "keep",
+			"afterVars": 0,
+			"afterPrivateVars": 0,
+			"afterStaticVars": 2,
+			"betweenVars": 0,
+			"betweenFunctions": 0
+		},
+		"classEmptyLines": {
+			"existingBetweenFields": "keep",
+			"afterVars": 0,
+			"afterPrivateVars": 0,
+			"afterStaticVars": 2,
+			"betweenVars": 0,
+			"betweenFunctions": 0,
+			"betweenStaticVars": 0
+		},
+		"afterBlocks": "keep",
+		"afterFieldsWithDocComments": "ignore",
+		"beforeDocCommentEmptyLines": "ignore",
+		"lineCommentsBetweenFunctions": "keep",
+		"afterLeftCurly": "remove",
+		"afterReturn": "remove",
+		"beforeBlocks": "keep",
+		"beforeRightCurly": "remove",
+		"lineCommentsBetweenTypes": "keep",
+		"maxAnywhereInFile": 4,
+		"finalNewline": false
+	},
+	"sameLine": {
+		"anonFunctionBody": "keep",
+		"functionBody": "keep",
+		"caseBody": "keep",
+		"catchBody": "keep",
+		"comprehensionFor": "keep",
+		"doWhile": "keep",
+		"doWhileBody": "keep",
+		"elseBody": "keep",
+		"elseIf": "keep",
+		"expressionCase": "keep",
+		"expressionIf": "keep",
+		"expressionTry": "keep",
+		"expressionIfWithBlocks": false,
+		"forBody": "keep",
+		"ifBody": "keep",
+		"ifElse": "keep",
+		"returnBody": "keep",
+		"returnBodySingleLine": "keep",
+		"tryBody": "keep",
+		"tryCatch": "keep",
+		"untypedBody": "keep",
+		"whileBody": "keep"
+	},
+	"wrapping": {
+		"maxLineLength": 140,
+		"functionSignature": {
+			"defaultWrap": "keep"
+		},
+		"opBoolChain": {
+			"defaultWrap": "keep"
+		},
+		"opAddSubChain": {
+			"defaultWrap": "keep"
+		},
+		"multiVar": {
+			"defaultWrap": "keep"
+		},
+		"callParameter": {
+			"defaultWrap": "keep",
+			"rules": [
+				{
+					"conditions": [
+						{
+							"cond": "hasMultilineItems",
+							"value": 1
+						}
+					],
+					"type": "keep"
+				}
+			]
+		},
+		"anonType": {
+			"defaultWrap": "keep"
+		},
+		"objectLiteral": {
+			"defaultWrap": "keep"
+		},
+		"arrayWrap": {
+			"defaultWrap": "keep"
+		}
+	},
+	"whitespace": {
+		"typeHintColonPolicy": "around"
+	},
+	"lineEnds": {
+		"leftCurly": "both"
+	}
+}

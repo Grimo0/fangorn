@@ -1,12 +1,12 @@
 /**
 	The Const class is a place for you to store various values that should be available everywhere in your code. Example: `Const.FPS`
 **/
-class Const {
-#if !macro
-
+class Const
+{
+	#if !macro
 	/** Default engine framerate (60) **/
-	public static var FPS(get,never) : Int;
-		static inline function get_FPS() return Std.int( hxd.System.getDefaultFrameRate() );
+	public static var FPS(get, never) : Int;
+	static inline function get_FPS() return Std.int(hxd.System.getDefaultFrameRate());
 
 	/**
 		"Fixed" updates framerate. 30fps is a good value here, as it's almost guaranteed to work on any decent setup, and it's more than enough to run any gameplay related physics.
@@ -21,29 +21,33 @@ class Const {
 
 	static var _nextUniqueId = 0;
 	/** Unique value generator **/
-	public static inline function makeUniqueId() {
+	public static inline function makeUniqueId()
+	{
 		return _nextUniqueId++;
 	}
 
+	/** Viewport prefered size **/
+	public static var SIZE = {width: 1920, height: 1080};
+
 	/** Viewport scaling **/
-	public static var SCALE(get,never) : Int;
-		static inline function get_SCALE() {
-			// can be replaced with another way to determine the game scaling
-			return dn.heaps.Scaler.bestFit_i(200,200);
-		}
+	public static var SCALE(get, never) : Int;
+	static inline function get_SCALE()
+	{
+		// can be replaced with another way to determine the game scaling
+		return dn.heaps.Scaler.bestFit_i(SIZE.width, SIZE.height);
+	}
 
 	/** Specific scaling for top UI elements **/
-	public static var UI_SCALE(get,never) : Float;
-		static inline function get_UI_SCALE() {
-			// can be replaced with another way to determine the UI scaling
-			return SCALE;
-		}
-
+	public static var UI_SCALE(get, never) : Float;
+	static inline function get_UI_SCALE()
+	{
+		// can be replaced with another way to determine the UI scaling
+		return SCALE;
+	}
 
 	/** Current build information, including date, time, language & various other things **/
-	public static var BUILD_INFO(get,never) : String;
-		static function get_BUILD_INFO() return dn.MacroTools.getBuildInfo();
-
+	public static var BUILD_INFO(get, never) : String;
+	static function get_BUILD_INFO() return dn.MacroTools.getBuildInfo();
 
 	/** Game layers indexes **/
 	static var _inc = 0;
@@ -54,7 +58,7 @@ class Const {
 	public static var DP_FX_FRONT = _inc++;
 	public static var DP_TOP = _inc++;
 	public static var DP_UI = _inc++;
-
+	public static var DP_DEBUG = _inc++;
 
 	/**
 		Simplified "constants database" using CastleDB and JSON files
@@ -76,5 +80,6 @@ class Const {
 	**/
 	public static var db = ConstDbBuilder.buildVar(["data.cdb", "const.json"]);
 
-#end
+	public static var VERSION = '${db.version}.${MacroTools.getBuildDate()}';
+	#end
 }

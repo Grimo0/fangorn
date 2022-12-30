@@ -1,8 +1,16 @@
 redist/
 bin/
 dump/
+debug/
+out/
+save/
+art/**/*.png~
+art/**/*.kra~
+art/**/*.kra-autosave.kra
 res/.tmp/
 res/**/backups/
-
-# VScode
-.vscode/settings.json
+res/atlas/*.atlas
+res/atlas/*.png
+imgui.ini
+tools/steam build output/
+.plastic/

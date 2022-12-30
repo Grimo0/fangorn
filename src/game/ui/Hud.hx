@@ -1,6 +1,7 @@
 package ui;
 
-class Hud extends GameChildProcess {
+class Hud extends GameChildProcess
+{
 	var flow : h2d.Flow;
 	var invalidated = true;
 	var notifications : Array<h2d.Flow> = [];
@@ -8,7 +9,8 @@ class Hud extends GameChildProcess {
 
 	var debugText : h2d.Text;
 
-	public function new() {
+	public function new()
+	{
 		super();
 
 		notifTw = new Tweenie(Const.FPS);
@@ -19,37 +21,40 @@ class Hud extends GameChildProcess {
 		flow = new h2d.Flow(root);
 		notifications = [];
 
-		debugText = new h2d.Text(Assets.fontPixel, root);
+		debugText = new h2d.Text(Assets.font(Console), root);
 		debugText.filter = new dn.heaps.filter.PixelOutline();
 		clearDebug();
 	}
 
-	override function onResize() {
+	override function onResize()
+	{
 		super.onResize();
 		root.setScale(Const.UI_SCALE);
 	}
 
 	/** Clear debug printing **/
-	public inline function clearDebug() {
+	public inline function clearDebug()
+	{
 		debugText.text = "";
 		debugText.visible = false;
 	}
 
 	/** Display a debug string **/
-	public inline function debug(v:Dynamic, clear=true) {
-		if( clear )
+	public inline function debug(v : Dynamic, clear = true)
+	{
+		if (clear)
 			debugText.text = Std.string(v);
 		else
-			debugText.text += "\n"+v;
+			debugText.text += "\n" + v;
 		debugText.visible = true;
-		debugText.x = Std.int( w()/Const.UI_SCALE - 4 - debugText.textWidth );
+		debugText.x = Std.int(w() / Const.UI_SCALE - 4 - debugText.textWidth);
 	}
 
-
-	/** Pop a quick s in the corner **/
-	public function notify(str:String, color:Col=0x0) {
+	/** Pop a quick s in the top right corner **/
+	public function notify(str : String, color : Col = 0x0)
+	{
 		// Bg
-		var t = Assets.tiles.getTile( D.tiles.uiNotification );
+		var t = Assets.tiles.getTile(D.tiles.uiNotification);
 		var f = new dn.heaps.FlowBg(t, 5, root);
 		f.colorizeBg(color);
 		f.paddingHorizontal = 6;
@@ -58,35 +63,39 @@ class Hud extends GameChildProcess {
 		f.paddingLeft = 9;
 		f.y = 4;
 
-		// Text
-		var tf = new h2d.Text(Assets.fontPixel, f);
-		tf.text = str;
-		tf.maxWidth = 0.6 * w()/Const.UI_SCALE;
-		tf.textColor = 0xffffff;
-		tf.filter = new dn.heaps.filter.PixelOutline( color.toBlack(0.2) );
+		var screenW = w() / Const.UI_SCALE;
 
-		// Notification lifetime
-		var durationS = 2 + str.length*0.04;
+		// Text
+		var tf = new h2d.Text(Assets.font(Console), f);
+		tf.text = str;
+		tf.maxWidth = 0.6 * screenW;
+		tf.textColor = 0xffffff;
+		tf.filter = new dn.heaps.filter.PixelOutline(color.toBlack(0.2));
+
+		// Notification lifetime & position
+		var durationS = 2 + str.length * 0.04;
 		var p = createChildProcess();
-		notifications.insert(0,f);
-		p.tw.createS(f.x, -f.outerWidth>-2, TEaseOut, 0.1);
-		p.onUpdateCb = ()->{
-			if( p.stime>=durationS && !p.cd.hasSetS("done",Const.INFINITE) )
-				p.tw.createS(f.x, -f.outerWidth, 0.2).end( p.destroy );
+		notifications.insert(0, f);
+		p.tw.createS(f.x, screenW > screenW - 2 - f.outerWidth, TEaseOut, 0.1);
+		p.onUpdateCb = () ->
+		{
+			if (p.stime >= durationS && !p.cd.hasSetS("done", Const.INFINITE))
+				p.tw.createS(f.x, screenW, 0.2).end(p.destroy);
 		}
-		p.onDisposeCb = ()->{
+		p.onDisposeCb = () ->
+		{
 			notifications.remove(f);
 			f.remove();
 		}
 
 		// Move existing notifications
 		var y = 4;
-		for(f in notifications) {
+		for (f in notifications)
+		{
 			notifTw.terminateWithoutCallbacks(f.y);
 			notifTw.createS(f.y, y, TEaseOut, 0.2);
-			y+=f.outerHeight+1;
+			y += f.outerHeight + 1;
 		}
-
 	}
 
 	public inline function invalidate() invalidated = true;
@@ -95,15 +104,18 @@ class Hud extends GameChildProcess {
 
 	public function onLevelStart() {}
 
-	override function preUpdate() {
+	override function preUpdate()
+	{
 		super.preUpdate();
 		notifTw.update(tmod);
 	}
 
-	override function postUpdate() {
+	override function postUpdate()
+	{
 		super.postUpdate();
 
-		if( invalidated ) {
+		if (invalidated)
+		{
 			invalidated = false;
 			render();
 		}

@@ -1,0 +1,20 @@
+{
+	"pot": true,
+	"paddingX": 1,
+	"paddingY": 1,
+	"edgePadding": false,
+	"rotation": false,
+	"maxWidth": 2048,
+	"maxHeight": 2048,
+	"stripWhitespaceX": true,
+	"stripWhitespaceY": true,
+	"filterMin": "Nearest",
+	"filterMag": "Nearest",
+	"fast": true,
+	"combineSubdirectories": false,
+	"flattenPaths": true,
+	"limitMemory": false,
+	"ignoreBlankImages": false,
+	"scale": [ 1 ],
+	"grid": false
+}

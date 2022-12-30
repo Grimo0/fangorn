@@ -1,0 +1,23 @@
+{
+	"workbench.colorCustomizations": {
+		 "titleBar.inactiveBackground": "#494949",
+		 "titleBar.activeBackground": "#6d6d6d",
+		 "titleBar.activeForeground": "#ffffff"
+	},
+	"spellright.language": [
+		"en"
+	],
+	"spellright.documentTypes": [
+		"markdown",
+		"plaintext",
+		"haxe",
+		"javascript"
+	],
+	"[yaml]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+		"editor.autoIndent": "advanced",
+		"files.eol": "\n",
+		"files.trimTrailingWhitespace": true
+	}
+}

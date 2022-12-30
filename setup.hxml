@@ -1,6 +1,11 @@
 # Misc
---cmd haxelib --always git castle https://github.com/deepnight/castle.git
+--cmd haxelib --always git castle https://github.com/ncannasse/castle.git
 --cmd haxelib --always git hscript https://github.com/HaxeFoundation/hscript.git
+--cmd haxelib --always install formatter
+--cmd haxelib --always install haxe-concurrent
+--cmd haxelib --always git hlsteam https://github.com/HeapsIO/hlsteam.git
+--cmd haxelib --always git hldx https://github.com/HaxeFoundation/hashlink/ master libs/directx
+--cmd haxelib --always git hlsdl https://github.com/HaxeFoundation/hashlink/ master libs/sdl
 
 # Aseprite
 --cmd haxelib --always install ase
@@ -9,12 +14,12 @@
 # Heaps
 --cmd haxelib --always install hldx
 --cmd haxelib --always install hlsdl
---cmd haxelib --always git heaps https://github.com/deepnight/heaps.git
+--cmd haxelib --always git heaps https://github.com/Grimo0/heaps.git
 
 # Deepnight
 --cmd haxelib --always install redistHelper
 --cmd haxelib --always git ldtk-haxe-api https://github.com/deepnight/ldtk-haxe-api.git
---cmd haxelib --always git deepnightLibs https://github.com/deepnight/deepnightLibs.git
+--cmd haxelib --always git deepnightLibs https://github.com/Grimo0/deepnightLibs.git
 
 # Done
 --cmd haxelib list

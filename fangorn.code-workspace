@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"search.exclude": {
+			"**/.plastic": true
+		},
+		"files.exclude": {
+			"**/.plastic": true
+		},
+		"haxe.enableExtendedIndentation": true,
+		"files.watcherExclude": {
+			"**/.plastic/**": true
+		},
+		"editor.detectIndentation": false,
+		"editor.insertSpaces": false,
+		"files.eol": "\n",
+		"codedox": {
+			"alwaysMultiline": false, // if false non-functions (types) are single line
+			"commentprefix": "	",
+			"commentbegin": "/**",
+			"commentend": "**/",
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"vshaxe.haxe-extension-pack",
+			"gsppvo.vscode-commandbar",
+			"mrorz.language-gettext"
+		]
+	}
+}

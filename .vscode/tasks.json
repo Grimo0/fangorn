@@ -1,25 +1,350 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "HaxeActiveConf",
-            "type": "haxe",
-            "args": "active configuration",
-            "problemMatcher": [
-                "$haxe-absolute",
-                "$haxe",
-                "$haxe-error",
-                "$haxe-trace"
-            ],
-            "presentation": {
-                "reveal": "never",
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-        },
-    ]
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		// ---
+		// Builds
+		// ---
+		{
+			"label": "HaxeActiveConf",
+			"type": "haxe",
+			"args": "active configuration",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "never",
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		},
+		{
+			"label": "Build Dev",
+			"type": "hxml",
+			"file": "build.dev.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "never",
+			},
+			"group": "build"
+		},
+		{
+			"label": "Build Release",
+			"type": "hxml",
+			"file": "build.release.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build"
+		},
+		{
+			"label": "Build DX",
+			"type": "hxml",
+			"file": "build.release.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build"
+		},
+		{
+			"label": "Build Sdl",
+			"type": "hxml",
+			"file": "build.release.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build"
+		},
+		{
+			"label": "Build JS",
+			"type": "hxml",
+			"file": "build.js.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build"
+		},
+		// ---
+		// Package creation
+		// ---
+		{
+			"label": "Build RedistBuilder",
+			"type": "hxml",
+			"file": "tools.redistBuilder.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build"
+		},
+		{
+			"label": "HL redist debug",
+			"type": "shell",
+			"command": "hl bin/redistBuilder.hl zip",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Build RedistBuilder"
+			],
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"panel": "shared"
+			},
+			"group": "build",
+			"detail": "Create a package in the redist folder."
+		},
+		{
+			"label": "HL redist",
+			"type": "shell",
+			"command": "haxelib run redistHelper build.release.hxml -p Fangorn -icon art/steam/client_icon.ico",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Pack textures"
+			],
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build",
+			"detail": "Create a package in the redist folder."
+		},
+		{
+			"label": "JS redist",
+			"type": "shell",
+			"command": "haxelib run redistHelper build.js.hxml -zip -p Fangorn",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Pack textures"
+			],
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build",
+			"detail": "Create a package in the redist folder."
+		},
+		// ---
+		// Uploads
+		// ---
+		{
+			"label": "Steam upload",
+			"type": "shell",
+			"command": "./tools/UploadSteam.bat",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+				"close": true
+			},
+			"detail": "Upload the build to steam"
+		},
+		{
+			"label": "Butler dx",
+			"type": "shell",
+			"command": "butler push redist/directx/Fangorn Grim0/Fangorn:win-32",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+			},
+			"detail": "Push the redist files on butler"
+		},
+		{
+			"label": "Butler sdl",
+			"type": "shell",
+			"command": "butler push redist/opengl_win/Fangorn Grim0/Fangorn:win-32-sdl",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+			},
+			"detail": "Push the redist files on butler"
+		},
+		{
+			"label": "Butler js",
+			"type": "shell",
+			"command": "butler push redist/js.zip Grim0/Fangorn:js",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+			},
+			"detail": "Push the redist files on butler"
+		},
+		// ---
+		// Tools
+		// ---
+		{
+			"label": "Build LangParser",
+			"type": "hxml",
+			"file": "tools.langParser.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared",
+				"clear": true
+			},
+			"group": "build"
+		},
+		{
+			"label": "Lang Parser",
+			"type": "shell",
+			"command": "hl bin/langParser.hl",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Build LangParser"
+			],
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Build Packer",
+			"type": "hxml",
+			"file": "tools.packer.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build"
+		},
+		{
+			"label": "Build PackerTexture",
+			"type": "hxml",
+			"file": "tools.packerTexture.hxml",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+			},
+			"group": "build"
+		},
+		{
+			"label": "Pack textures",
+			"type": "shell",
+			"command": "hl bin/packerTexture.hl",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Build PackerTexture"
+			],
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {}
+		},
+		{
+			"label": "Src Formatter",
+			"type": "shell",
+			"command": "haxelib run formatter -s src",
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			],
+			"presentation": {
+				"reveal": "silent",
+				"revealProblems": "onProblem",
+				"panel": "shared"
+			},
+			"detail": "Format all files in /src"
+		}
+	]
 }
