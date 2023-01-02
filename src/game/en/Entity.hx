@@ -198,25 +198,59 @@ class Entity
 	public var pivotY(default, set) : Float = 1;
 
 	/** Entity attach X pixel coordinate **/
-	public var attachX(get, never) : Float;
+	public var attachX(get, set) : Float;
 	inline function get_attachX() return (cx + xr) * Const.GRID;
+	inline function set_attachX(v : Float)
+	{
+		var x = v / Const.GRID;
+		cx = Std.int(x);
+		xr = x - cx;
+		return attachX;
+	}
 	/** Entity attach Y pixel coordinate **/
-	public var attachY(get, never) : Float;
+	public var attachY(get, set) : Float;
 	inline function get_attachY() return (cy + yr) * Const.GRID;
+	inline function set_attachY(v : Float)
+	{
+		var y = v / Const.GRID;
+		cy = Std.int(y);
+		yr = y - cy;
+		return attachY;
+	}
 
 	// Various coordinates getters, for easier gameplay coding
 	/** Left pixel coordinate of the bounding box **/
-	public var left(get, never) : Float;
+	public var left(get, set) : Float;
 	inline function get_left() return attachX + (0 - pivotX) * wid;
+	inline function set_left(v : Float)
+	{
+		attachX = v - (0 - pivotX) * wid;
+		return left;
+	}
 	/** Right pixel coordinate of the bounding box **/
-	public var right(get, never) : Float;
+	public var right(get, set) : Float;
 	inline function get_right() return attachX + (1 - pivotX) * wid;
+	inline function set_right(v : Float)
+	{
+		attachX = v - (1 - pivotX) * wid;
+		return right;
+	}
 	/** Top pixel coordinate of the bounding box **/
-	public var top(get, never) : Float;
+	public var top(get, set) : Float;
 	inline function get_top() return attachY + (0 - pivotY) * hei;
+	inline function set_top(v : Float)
+	{
+		attachY = v - (0 - pivotY) * hei;
+		return top;
+	}
 	/** Bottom pixel coordinate of the bounding box **/
-	public var bottom(get, never) : Float;
+	public var bottom(get, set) : Float;
 	inline function get_bottom() return attachY + (1 - pivotY) * hei;
+	inline function set_bottom(v : Float)
+	{
+		attachY = v - (1 - pivotY) * hei;
+		return bottom;
+	}
 
 	/** Center X pixel coordinate of the bounding box **/
 	public var centerX(get, never) : Float;
